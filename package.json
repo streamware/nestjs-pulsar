@@ -1,6 +1,6 @@
 {
   "name": "@streamware/nestjs-pulsar",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "NestJS npm package starter",
   "author": "John Biundo <johnfbiundo@gmail.com>",
   "license": "MIT",
