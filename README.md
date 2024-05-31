@@ -1,41 +1,62 @@
-<h1 align="center"></h1>
+## Installing **Nestjs Pulsar**
 
-<div align="center">
-  <a href="http://nestjs.com/" target="_blank">
-    <img src="https://nestjs.com/img/logo_text.svg" width="150" alt="Nest Logo" />
-  </a>
-</div>
-
-<h3 align="center">NestJS npm Package Starter</h3>
-
-<div align="center">
-  <a href="https://nestjs.com" target="_blank">
-    <img src="https://img.shields.io/badge/built%20with-NestJs-red.svg" alt="Built with NestJS">
-  </a>
-</div>
-
-### Installation
-
-1. Clone the repo
-2. Run npm/yarn install
-
-```bash
-cd nestjs-package-starter
-npm install
+```
+npm i @nestjs/config @streamware/nestjs-pulsar
 ```
 
-## Change Log
+```
+yarn add @nestjs/config @streamware/nestjs-pulsar
+```
 
-See [Changelog](CHANGELOG.md) for more information.
+## Usage
 
-## Contributing
+We'll first start off with creating message topic enum, topics.enum.ts
 
-Contributions welcome! See [Contributing](CONTRIBUTING.md).
+```
+export enum Topics {
+  USER_CREATED,
+  ...
+}
+```
 
-## Author
+next we want to produce message with created topic, now we inject **PulsarProducerService** into our AppService
 
-**John Biundo (Y Prospect on [Discord](https://discord.gg/G7Qnnhy))**
+```
+import { Injectable } from '@nestjs/common';
+import { PulsarProducerService } from './pulsar/pulsar-producer.service';
+import { Topics } from './topics.enum.ts';
 
-## License
+@Injectable()
+export class AppService {
+  constructor(private readonly pulsarProducerService: PulsarProducerService) {}
 
-Licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+  async sendMessage(request: any) {
+    for (let i = 0; i <= 5; i++) {
+      await this.pulsarProducerService.produce(Topics.USER_CREATED, request);
+    }
+  }
+}
+```
+
+for consuming messages from pulsar you have to implement **Consumer** like so
+
+```
+import { Inject, Injectable } from '@nestjs/common';
+import { PULSAR_CLIENT, PulsarConsumer } from '@streamware/nestjs-pulsar';
+import { Client } from 'pulsar-client';
+
+@Injectable()
+export class AppConsumer extends PulsarConsumer<any> {
+  constructor(@Inject(PULSAR_CLIENT) pulsarClient: Client) {
+    super(pulsarClient, {
+      topic: 'USER_CREATED',
+      subscriptionType: 'Shared',
+      subscription: 'nestjs-shared',
+    });
+  }
+
+  protected handleMessage(data: any) {
+    this.logger.log('New message in AppConsumer.', data);
+  }
+}
+```
