@@ -1,8 +1,8 @@
 {
   "name": "@streamware/nestjs-pulsar",
   "version": "0.0.9",
-  "description": "NestJS npm package starter",
-  "author": "Hasan Haghniya <johnfbiundo@gmail.com>",
+  "description": "A robust and easy-to-use NestJS module for integrating with Apache Pulsar, enabling efficient message streaming and pub-sub capabilities.",
+  "author": "Hasan Haghniya <secretkeeper@streamware.co>",
   "license": "MIT",
   "readmeFilename": "README.md",
   "main": "dist/index.js",
