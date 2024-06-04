@@ -1,3 +1,4 @@
+export * from './pulsar-client.config';
 export * from './pulsar.module';
 export * from './pulsar-client.service';
 export * from './pulsar-producer.service';
