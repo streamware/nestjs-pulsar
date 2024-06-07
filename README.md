@@ -1,3 +1,5 @@
+![nestjs-apache-pulsar](assets/nestjs-apache-pulsar.png?raw=true)
+
 ## NestJS Apache Pulsar
 A robust and easy-to-use NestJS module for integrating with Apache Pulsar, enabling efficient message streaming and pub-sub capabilities.
 
