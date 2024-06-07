@@ -75,3 +75,6 @@ export class AppConsumer extends PulsarConsumer<any> {
   }
 }
 ```
+## License
+
+The code in this repository is licensed under the terms of the [Apache License 2.0](LICENSE).
