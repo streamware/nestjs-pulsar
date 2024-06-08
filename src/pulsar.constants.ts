@@ -1,1 +1,0 @@
-export const PULSAR_CLIENT = 'PULSAR_CLIENT';

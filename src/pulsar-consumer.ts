@@ -6,7 +6,9 @@ export abstract class PulsarConsumer<T>
   implements OnModuleInit, OnModuleDestroy
 {
   private consumer: Consumer;
+
   protected readonly logger = new Logger(this.config.topic);
+
   protected running = true;
 
   constructor(
