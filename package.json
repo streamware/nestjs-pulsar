@@ -30,9 +30,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hasanhaghniya/nestjs-pulsar"
+    "url": "https://github.com/streamware/nestjs-pulsar"
   },
-  "bugs": "https://github.com/hasanhaghniya/nestjs-pulsar",
+  "bugs": "https://github.com/streamware/nestjs-pulsar",
   "peerDependencies": {
     "@nestjs/common": "^10.3.8",
     "@nestjs/config": "3.2.2"
