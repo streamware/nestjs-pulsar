@@ -14,7 +14,7 @@
   "scripts": {
     "start:dev": "tsc -w",
     "build": "tsc",
-    "prepare": "rimraf dist && yarn build",
+    "prepare": "rimraf dist && npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
