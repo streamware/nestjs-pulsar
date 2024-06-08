@@ -3,10 +3,14 @@ on:
   push:
     branches:
       - master
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
