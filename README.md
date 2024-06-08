@@ -1,11 +1,13 @@
 ![nestjs-apache-pulsar](assets/nestjs-apache-pulsar.png?raw=true)
 
 ## NestJS Apache Pulsar
+
 A robust and easy-to-use NestJS module for integrating with Apache Pulsar, enabling efficient message streaming and pub-sub capabilities.
 
 The NestJS Apache Pulsar package provides seamless integration with Apache Pulsar, empowering your NestJS applications with advanced messaging and event streaming capabilities. Leverage the power of Apache Pulsar's multi-topic messaging, high-throughput, and low-latency features directly within your NestJS ecosystem.
 
 ### Features
+
 - 🚀 Easy Integration: Quickly integrate Apache Pulsar with your NestJS application using this module.
 - 📬 Publisher and Subscriber Support: Effortlessly publish and subscribe to topics within your NestJS services.
 - 📈 Scalability: Harness the scalability of Apache Pulsar to handle high volumes of messages.
@@ -23,7 +25,12 @@ npm i @nestjs/config @streamware/nestjs-pulsar
 yarn add @nestjs/config @streamware/nestjs-pulsar
 ```
 
+```
+pnpm add @nestjs/config @streamware/nestjs-pulsar
+```
+
 ## Usage
+
 We'll first start off with creating message topic enum, topics.enum.ts:
 
 ```typescript
@@ -32,10 +39,13 @@ export enum Topics {
   ...
 }
 ```
+
 then create .env file in your root directory:
+
 ```
 PULSAR_SERVICE_URL=pulsar://localhost:6650
 ```
+
 and we mount PulsarModule into AppModule:
 
 ```typescript
@@ -50,7 +60,7 @@ import { AppService } from './app.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    PulsarModule
+    PulsarModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -71,7 +81,9 @@ export class AppService {
 
   async sendMessage(request: any) {
     for (let i = 0; i <= 5; i++) {
-      await this.pulsarProducerService.produce(Topics.USER_CREATED, request, { batchingEnabled: true });
+      await this.pulsarProducerService.produce(Topics.USER_CREATED, request, {
+        batchingEnabled: true,
+      });
     }
   }
 }
@@ -116,7 +128,9 @@ import { AppConsumer } from './app.consumer';
 })
 export class AppModule {}
 ```
+
 ### Client Config
+
 see full configurations [here](https://pulsar.apache.org/docs/next/client-libraries-node-configs)
 
 Clinet configurations should be defined in .env:
@@ -133,28 +147,31 @@ tlsValidateHostname=
 tlsAllowInsecureConnection=
 statsIntervalInSeconds=
 ```
+
 for authentication see [here](https://pulsar.apache.org/docs/next/security-tls-authentication/)
 
 ### Producer Config
+
 - producerName: A name for the producer. If you do not explicitly assign a name, Pulsar automatically generates a globally unique name. If you choose to explicitly assign a name, it needs to be unique across all Pulsar clusters, otherwise the creation operation throws an error.
 - sendTimeoutMs: When publishing a message to a topic, the producer waits for an acknowledgment from the responsible Pulsar broker. If a message is not acknowledged within the threshold set by this parameter, an error is thrown. If you set sendTimeoutMs to -1, the timeout is set to infinity (and thus removed). Removing the send timeout is recommended when using Pulsar's message de-duplication feature. **(Default: 30000)**
-- initialSequenceId: The initial sequence ID of the message. When producer send message, add sequence ID to message. The ID is increased each time to send.	
+- initialSequenceId: The initial sequence ID of the message. When producer send message, add sequence ID to message. The ID is increased each time to send.
 - maxPendingMessages: The maximum size of the queue holding pending messages (i.e. messages waiting to receive an acknowledgment from the broker). By default, when the queue is full all calls to the send method fails unless blockIfQueueFull is set to true. **(Default: 1000)**
-- maxPendingMessagesAcrossPartitions: The maximum size of the sum of partition's pending queue.	**(Default: 50000)**
-- blockIfQueueFull: If set to true, the producer's send method waits when the outgoing message queue is full rather than failing and throwing an error (the size of that queue is dictated by the maxPendingMessages parameter); if set to false (the default), send operations fails and throw a error when the queue is full.	**(Default: false)**
-- messageRoutingMode: The message routing logic (for producers on partitioned topics). This logic is applied only when no key is set on messages. The available options are: round robin (RoundRobinDistribution), or publishing all messages to a single partition (UseSinglePartition, the default).	**(Default: UseSinglePartition)**
-- hashingScheme: The hashing function that determines the partition on which a particular message is published (partitioned topics only). The available options are: JavaStringHash (the equivalent of String.hashCode() in Java), Murmur3_32Hash (applies the Murmur3 hashing function), or BoostHash (applies the hashing function from C++'s Boost library).	**(Default: BootHash)**
-- compressionType: The message data compression type used by the producer. The available options are LZ4, and Zlib, ZSTD, SNAPPY.	**(Default: Compression None)**
+- maxPendingMessagesAcrossPartitions: The maximum size of the sum of partition's pending queue. **(Default: 50000)**
+- blockIfQueueFull: If set to true, the producer's send method waits when the outgoing message queue is full rather than failing and throwing an error (the size of that queue is dictated by the maxPendingMessages parameter); if set to false (the default), send operations fails and throw a error when the queue is full. **(Default: false)**
+- messageRoutingMode: The message routing logic (for producers on partitioned topics). This logic is applied only when no key is set on messages. The available options are: round robin (RoundRobinDistribution), or publishing all messages to a single partition (UseSinglePartition, the default). **(Default: UseSinglePartition)**
+- hashingScheme: The hashing function that determines the partition on which a particular message is published (partitioned topics only). The available options are: JavaStringHash (the equivalent of String.hashCode() in Java), Murmur3_32Hash (applies the Murmur3 hashing function), or BoostHash (applies the hashing function from C++'s Boost library). **(Default: BootHash)**
+- compressionType: The message data compression type used by the producer. The available options are LZ4, and Zlib, ZSTD, SNAPPY. **(Default: Compression None)**
 - batchingEnabled: If set to true, the producer send message as batch. **(Default: true)**
-- batchingMaxPublishDelayMs: The maximum time of delay sending message in batching.	 **(Default: 10)**
-- batchingMaxMessages: The maximum size of sending message in each time of batching.	**(Default: 1000)**
-- properties: The metadata of producer.	
+- batchingMaxPublishDelayMs: The maximum time of delay sending message in batching. **(Default: 10)**
+- batchingMaxMessages: The maximum size of sending message in each time of batching. **(Default: 1000)**
+- properties: The metadata of producer.
 
 ### Consumer Config
+
 - topic: The Pulsar topic on which the consumer establishes a subscription and listen for messages.
 - topics: The array of topics.
 - topicsPattern: The regular expression for topics.
-- subscription: The subscription name for this consumer.	
+- subscription: The subscription name for this consumer.
 - subscriptionType: Available options are Exclusive, Shared, Key_Shared, and Failover. **(Default: Exclusive)**
 - subscriptionInitialPosition: Initial position at which to set cursor when subscribing to a topic at first time. **(Default: SubscriptionInitialPosition.Latest)**
 - ackTimeoutMs: Acknowledge timeout in milliseconds. **(Default: 0)**
