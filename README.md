@@ -186,6 +186,13 @@ readCompacted can only be enabled on subscriptions to persistent topics, which h
 
 Attempting to enable it on subscriptions to non-persistent topics or on shared subscriptions leads to a subscription call throwing a PulsarClientException. **(Default: false)**
 
+## To-Do List
+
+- [ ] Support for readers.
+- [ ] Support for multi clients.
+
+Feel free to modify this list as needed and mark off tasks as you complete them.
+
 ## License
 
 The code in this repository is licensed under the terms of the [Apache License 2.0](LICENSE).
