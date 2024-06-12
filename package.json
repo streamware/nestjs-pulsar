@@ -53,6 +53,7 @@
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.3.8",
     "@nestjs/testing": "10.3.8",
+    "@semantic-release/npm": "^12.0.1",
     "@types/jest": "29.5.12",
     "@types/node": "20.12.12",
     "@types/supertest": "6.0.2",
