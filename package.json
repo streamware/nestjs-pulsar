@@ -1,6 +1,6 @@
 {
   "name": "@streamware/nestjs-pulsar",
-  "version": "0.0.9",
+  "version": "1.0.1",
   "description": "A robust and easy-to-use NestJS module for integrating with Apache Pulsar, enabling efficient message streaming and pub-sub capabilities.",
   "author": "Hasan Haghniya <secretkeeper@streamware.co>",
   "license": "MIT",
@@ -53,6 +53,7 @@
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.3.8",
     "@nestjs/testing": "10.3.8",
+    "@semantic-release/npm": "^12.0.1",
     "@types/jest": "29.5.12",
     "@types/node": "20.12.12",
     "@types/supertest": "6.0.2",
