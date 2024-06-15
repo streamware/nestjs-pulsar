@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/streamware/nestjs-pulsar/compare/v1.0.2...v1.0.3) (2024-06-15)
+
+
+### Bug Fixes
+
+* Remove console.log statement in PulsarConsumer receive method ([29d56ee](https://github.com/streamware/nestjs-pulsar/commit/29d56ee2e6613851f7a1e9cf00c43c3df6d1939e))
+
 ## [1.0.2](https://github.com/streamware/nestjs-pulsar/compare/v1.0.1...v1.0.2) (2024-06-12)
 
 
