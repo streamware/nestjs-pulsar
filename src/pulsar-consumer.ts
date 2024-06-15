@@ -46,7 +46,6 @@ export abstract class PulsarConsumer<T>
   private async receive(message: Message) {
     try {
       const data: T = JSON.parse(message.getData().toString());
-      console.log(data, message.getMessageId().toString());
       this.handleMessage(data);
     } catch (err) {
       this.logger.error('Error consuming.', err);
