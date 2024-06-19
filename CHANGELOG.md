@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/streamware/nestjs-pulsar/compare/v1.0.3...v1.0.4) (2024-06-19)
+
+
+### Bug Fixes
+
+* bugs and package github url ([191d35f](https://github.com/streamware/nestjs-pulsar/commit/191d35f7cb556b5527a0757ffcc0a502c9c4fe5c))
+
 ## [1.0.3](https://github.com/streamware/nestjs-pulsar/compare/v1.0.2...v1.0.3) (2024-06-15)
 
 
