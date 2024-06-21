@@ -3,17 +3,7 @@
     "master"
   ],
   "plugins": [
-    [
-      "@semantic-release/commit-analyzer",
-      {
-        "preset": "conventionalchangelog",
-        "releaseRules": [
-          { "type": "refactor", "release": "patch" },
-          { "type": "ci", "release": "patch" },
-          { "type": "build", "release": "patch" }
-        ]
-      }
-    ],
+    "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
       "@semantic-release/changelog",
