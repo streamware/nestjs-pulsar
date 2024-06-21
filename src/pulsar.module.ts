@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Client } from 'pulsar-client';
 import { PULSAR_CLIENT } from './pulsar-client.config';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PulsarProducerService } from './pulsar-producer.service';
 import { PulsarClientService } from './pulsar-client.service';
 import pulsarClientConfig from './pulsar-client.config';
