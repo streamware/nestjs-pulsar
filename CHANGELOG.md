@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/streamware/nestjs-pulsar/compare/v1.0.4...v1.0.5) (2024-06-21)
+
+
+### Bug Fixes
+
+* safely parse environment variables to prevent NaN values ([bc7860c](https://github.com/streamware/nestjs-pulsar/commit/bc7860c6f821f1363c7eed2affb9268c36b7e066))
+
 ## [1.0.4](https://github.com/streamware/nestjs-pulsar/compare/v1.0.3...v1.0.4) (2024-06-19)
 
 
