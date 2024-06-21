@@ -43,17 +43,28 @@ function getAuthentication():
   }
 }
 
+function safeParseInt(value: string | undefined, fallback: number): number {
+  const parsed = parseInt(value || '', 10);
+  return isNaN(parsed) ? fallback : parsed;
+}
+
 export default (): { pulsar: ClientConfig } => ({
   pulsar: {
     serviceUrl: process.env.PULSAR_SERVICE_URL || 'pulsar://localhost:6650',
     authentication: getAuthentication(),
-    operationTimeoutSeconds:
-      parseInt(process.env.PULSAR_OPERATION_TIMEOUT_SECONDS, 10) || 30,
-    ioThreads: parseInt(process.env.PULSAR_IO_THREADS, 10) || 1,
-    messageListenerThreads:
-      parseInt(process.env.PULSAR_MESSAGE_LISTENER_THREADS, 10) || 1,
-    concurrentLookupRequest:
-      parseInt(process.env.PULSAR_CONCURRENT_LOOKUP_REQUEST, 10) || undefined,
+    operationTimeoutSeconds: safeParseInt(
+      process.env.PULSAR_OPERATION_TIMEOUT_SECONDS,
+      30,
+    ),
+    ioThreads: safeParseInt(process.env.PULSAR_IO_THREADS, 1),
+    messageListenerThreads: safeParseInt(
+      process.env.PULSAR_MESSAGE_LISTENER_THREADS,
+      1,
+    ),
+    concurrentLookupRequest: safeParseInt(
+      process.env.PULSAR_CONCURRENT_LOOKUP_REQUEST,
+      undefined,
+    ),
     useTls: process.env.PULSAR_USE_TLS === 'true' || undefined,
     tlsTrustCertsFilePath:
       process.env.PULSAR_TLS_TRUST_CERTS_FILE_PATH || undefined,
@@ -61,8 +72,10 @@ export default (): { pulsar: ClientConfig } => ({
       process.env.PULSAR_TLS_VALIDATE_HOSTNAME === 'true' || undefined,
     tlsAllowInsecureConnection:
       process.env.PULSAR_TLS_ALLOW_INSECURE_CONNECTION === 'true' || undefined,
-    statsIntervalInSeconds:
-      parseInt(process.env.PULSAR_STATS_INTERVAL_IN_SECONDS, 10) || undefined,
+    statsIntervalInSeconds: safeParseInt(
+      process.env.PULSAR_STATS_INTERVAL_IN_SECONDS,
+      undefined,
+    ),
     listenerName: process.env.PULSAR_LISTENER_NAME || undefined,
   },
 });
